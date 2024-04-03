@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Penetration Testing Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+        h1 {
+            font-size: 24px;
+        }
+        .section {
+            background-color: #fff;
+            margin: 20px;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+        }
+        .severity {
+            font-weight: bold;
+            color: #d9534f; /* Red for high severity */
+        }
+        .url {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .url:hover {
+            text-decoration: underline;
+        }
+        .medium-severity {
+            color: #f0ad4e; /* Orange for medium severity */
+        }
+        .low-severity {
+            color: #5bc0de; /* Blue for low severity */
+        }
+        .high-severity-bg {
+            background-color: #f2dede; /* Light red background for high severity */
+        }
+        .medium-severity-bg {
+            background-color: #fcf8e3; /* Light yellow background for medium severity */
+        }
+        .low-severity-bg {
+            background-color: #d9edf7; /* Light blue background for low severity */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Penetration Testing Report</h1>
+    </header>
+
+    <div class="section high-severity-bg">
+        <h2>Issue 1: Vulnerability Description</h2>
+        <p class="severity">Severity: High</p>
+        <p>A detailed description of the vulnerability or issue found during the penetration test.</p>
+        <p>Affected URL: <a class="url" href="https://www.example.com/vulnerable-page">https://www.example.com/vulnerable-page</a></p>
+        <p>Solution: Describe the recommended solution or mitigation steps to address this issue.</p>
+    </div>
+
+    <div class="section medium-severity-bg">
+        <h2>Issue 2: Another Vulnerability</h2>
+        <p class="medium-severity">Severity: Medium</p>
+        <p>Details of another vulnerability or issue, if applicable.</p>
+        <p>Affected URL: <a class="url" href="https://www.example.com/another-vulnerable-page">https://www.example.com/another-vulnerable-page</a></p>
+        <p>Solution: Explain how to mitigate or fix this issue.</p>
+    </div>
+
+    <div class="section low-severity-bg">
+        <h2>Issue 3: Third Vulnerability</h2>
+        <p class="low-severity">Severity: Low</p>
+        <p>Details of a low-severity vulnerability or issue.</p>
+        <p>Affected URL: <a class="url" href="https://www.example.com/third-vulnerable-page">https://www.example.com/third-vulnerable-page</a></p>
+        <p>Solution: Suggest steps to address this issue.</p>
+    </div>
+
+    <!-- Add more sections for additional findings -->
+
+</body>
+</html>

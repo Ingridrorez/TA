@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON File Upload</title>
+</head>
+<body>
+    <h1>Upload a JSON File</h1>
+    <form action="/upload-json" method="POST" enctype="multipart/form-data">
+        <label for="jsonFile">Select a JSON File :</label>
+        <input type="file" name="jsonFile" id="jsonFile" accept=".json" required>
+
+        <label for="email">Email Address :</label>
+        <input type="email" name="email" id="email" placeholder="Your Email" required>
+        <button type="submit">Upload</button>
+    </form>
+
+    <form action="/upload-url" method="POST" enctype="multipart/form-data">
+        <label for="emailURL">Email Address :</label>
+        <input type="email" name="emailURL" id="emailURL" placeholder="Your Email" required>
+    
+        <label for="url">URL :</label>
+        <input type="text" name="url" id="url" placeholder="URL to Scan" required>
+        <button type="submit">Upload</button>
+    </form>
+</body>
+</html>
