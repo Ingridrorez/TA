@@ -26,6 +26,7 @@ async function processURL(url, email) {
                 jsonStatus.status.push(response.status);
                 jsonResponse.response.push(response.data);
             } catch (error) {
+                console.error('Error in axios request:', error.message);
                 throw error;
             }
         };
@@ -35,6 +36,7 @@ async function processURL(url, email) {
         return { status: jsonStatus, data: jsonResponse };
 
     } catch (error) {
+        console.error('Error processing URL:', error.message);
         throw new Error('Error reading URL.');
     }
 }
@@ -47,15 +49,35 @@ async function checkScanningStatus(url, taskId, email) {
     console.log('API for Task ' + taskId + ' call scheduled. Running every 1 minute.');
 }
 
+// async function makeApiCall(url, scheduledJob, taskId, email) {
+//     try {
+//         const response = await axios.get(url);
+//         console.log('API Response for Task ' + taskId +':', response.data.scan_status);
+
+//         if (response.data.scan_status === 'succeeded' || response.data.scan_status === 'failed') {
+//             console.log('Received "succeeded" or "failed" response. Stopping API for Task ' + taskId + ' calls.');
+//             sendNotificationEmail(response.data, taskId, email);
+//             scheduledJob.stop(); 
+//         }
+
+//     } catch (error) {
+//         console.error('API for Task ' + taskId + ' Error:', error.message);
+//     }
+// }
+
 async function makeApiCall(url, scheduledJob, taskId, email) {
     try {
         const response = await axios.get(url);
-        console.log('API Response for Task ' + taskId +':', response.data.scan_status);
+        console.log('API Response for Task ' + taskId + ':', response.data.scan_status);
 
-        if (response.data.scan_status === 'succeeded' || response.data.scan_status === 'failed') {
-            console.log('Received "succeeded" or "failed" response. Stopping API for Task ' + taskId + ' calls.');
+        if (response.data.scan_status === 'succeeded') {
+            console.log('Received "succeeded" response. Stopping API for Task ' + taskId + ' calls.');
             sendNotificationEmail(response.data, taskId, email);
-            scheduledJob.stop(); 
+            scheduledJob.stop();
+        } else if (response.data.scan_status === 'failed') {
+            console.log('Received "failed" response. Stopping API for Task ' + taskId + ' calls.');
+            sendNotificationEmail(response.data, taskId, email);
+            scheduledJob.stop();
         }
 
     } catch (error) {
@@ -64,7 +86,8 @@ async function makeApiCall(url, scheduledJob, taskId, email) {
 }
 
 async function sendNotificationEmail(scanResults, taskId, email) {
-    const url = 'https://api.brevo.com/v3/smtp/email';
+    // const url = 'https://api.brevo.com/v3/smtp/email';
+    const url = 'https://api.brevo.com/v3/emailCampaigns';
 
     const headers = {
       'User-Agent': 'curl/7.77.0',
@@ -74,7 +97,7 @@ async function sendNotificationEmail(scanResults, taskId, email) {
     };
     
     const scanResultsString = JSON.stringify(scanResults);
-    const listItems = generateListItems(scanResults.issue_events);
+    const listItems = generateListItems(scanResults.issue_events || []);
 
     const emailContent = `
         <!DOCTYPE html>
@@ -230,8 +253,8 @@ async function sendNotificationEmail(scanResults, taskId, email) {
 
     const data = {
       sender: {
-        name: 'Rheza Sender',
-        email: 'rerheza@gmail.com',
+        name: 'Ingrid Rorez',
+        email: 'rrzthehacker@gmail.com',
       },
       to: [
         {
@@ -240,7 +263,8 @@ async function sendNotificationEmail(scanResults, taskId, email) {
         },
       ],
       subject: 'Burp Rest Scan Result',
-      htmlContent: emailContent 
+      htmlContent: emailContent,
+      name: 'Scan Result Burpsuite'
     }
     
     axios.post(url, data, { headers })
@@ -251,6 +275,16 @@ async function sendNotificationEmail(scanResults, taskId, email) {
       .catch(error => {
         console.error('Error:', error.message);
       });
+
+      try {
+        const response = await axios.post(url, data, { headers });
+        console.log('Response Status Code:', response.status);
+        console.log('Response Data:', response.data);
+        console.log('Email successfully sent to:', email);
+    } catch (error) {
+        console.error('Error sending email:', error.message);
+        
+    }
 }
 
 function generateListItems(issueEvents) {

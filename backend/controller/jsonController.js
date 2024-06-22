@@ -18,10 +18,10 @@ async function uploadJSON(req, res) {
     try {
         if (isFile) {
             const result = await processJSONFile(arg, email);
-            res.json({ message: 'JSON file uploaded and processed successfully.', ...result });
+            res.json({ message: 'JSON file uploadedd and processed successfully.', ...result });
         } else {
             const result = await processURL(arg, email);
-            res.json({ message: 'URL uploaded and processed successfully.', ...result });            
+            res.json({ message: 'URL uploadedd and processed successfully.', ...result });            
         }
     } catch (error) {
         res.status(500).json({ error: error.message });

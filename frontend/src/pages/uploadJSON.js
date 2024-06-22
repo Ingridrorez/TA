@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 
 
 const Upload = () => {
+  
     return ( 
         <div className="container">
 
@@ -20,7 +21,7 @@ const Upload = () => {
           
           <CheckCircleIcon mt={20}  boxSize={40}  color={"green"} />
           <Text color={"green"} as='b' fontSize='5xl'>Succesfully</Text>
-          <Text fontSize='5xl'>JSON file uploaded and processed</Text>
+          <Text fontSize='5xl'>JSON file uploaddeded and processed</Text>
           <Text fontSize='xl'>*Result will be sent via Email</Text>
 
           

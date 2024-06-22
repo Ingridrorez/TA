@@ -27,21 +27,8 @@ const ErrorPage = () => {
 
           <Button mt={20}  bg={"#016DD9"} color={"white"} h={"50px"}  w="25%"><Link to="/"  >Home</Link></Button>
 
-
-        
-          
-
-
-
           
             </VStack>
-
-   
-
-            
-
-
-
 
 
 

@@ -1,14 +1,6 @@
 {
-  "request": [
-    {
-      "method": "POST",
-      "endpoint": "/scan",
-      "parameters": {
-        "url": [
-          "http://testphp.vulnweb.com/artists.php?artist=1",
-          "https://spog.co.id/index.php?action=newsmore&id=1"
-        ]
-      }
+  {
+    "url": {
+        "raw" : "https://web-ta-omega.vercel.app/"
     }
-  ]
 }
